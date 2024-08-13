@@ -1,14 +1,18 @@
 import reactLogo from './assets/react.svg'
 import viteLogo from '/vite.svg'
 import './App.css'
+import {useState} from "react";
 
 function App() {
+  const [color, setColor] = useState('#000000');
+
   const onclick = async () => {
-    let [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    chrome.scripting.executeScript({
+    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    chrome.scripting.executeScript<string[], void>({
       target: {tabId: tab.id!},
-      func: () => {
-        alert('Hello from the content script');
+      args: [color], // Needed to pass from popup to content script
+      func: (color) => {
+        document.body.style.backgroundColor = color;
       }
     });
   }
@@ -25,6 +29,7 @@ function App() {
       </div>
       <h1>My extension</h1>
       <div className="card">
+        <input type="color" onChange={(e) => setColor(e.currentTarget.value)} />
         <button onClick={() => onclick()}>
           Click me
         </button>
