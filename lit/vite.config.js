@@ -54,7 +54,13 @@ function generateManifestPlugin(targetBrowser) {
           background: {
             scripts: srcManifest['{{firefox}}.scripts']
           }
-        })
+        }),
+        host_permissions: [
+          "http://localhost/*"
+        ],
+        content_security_policy: {
+          extension_pages: "script-src 'self' 'wasm-unsafe-eval' http://localhost:*; object-src 'self';"
+        }
       };
 
       writeJsonFile(distManifestPath, manifest);
