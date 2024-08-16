@@ -1,5 +1,6 @@
 import { defineConfig } from 'vite';
 import webExtension, { readJsonFile } from "vite-plugin-web-extension";
+import cleanPlugin from 'vite-plugin-clean';
 
 function generateManifest() {
   const manifest = readJsonFile("src/manifest.json");
@@ -28,6 +29,9 @@ export default defineConfig({
       manifest: generateManifest,
       watchFilePaths: ["package.json", "manifest.json"],
       disableAutoLaunch: true, // Disable automatic browser opening
+    }),
+    cleanPlugin({
+      targetFiles: ['./dist/**/*'], // Clean specific elements in the dist folder
     }),
     {
       name: 'watch-external',
