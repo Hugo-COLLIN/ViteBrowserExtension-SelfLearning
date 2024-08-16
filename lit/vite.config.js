@@ -31,7 +31,7 @@ export default defineConfig({
       disableAutoLaunch: true, // Disable automatic browser opening
     }),
     cleanPlugin({
-      targetFiles: ['./dist/**/*'], // Clean specific elements in the dist folder
+      targetFiles: ['./dist'], // Clean the dist folder
     }),
     {
       name: 'watch-external',
