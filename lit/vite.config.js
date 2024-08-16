@@ -8,8 +8,18 @@ export default defineConfig({
     outDir: './dist', // Exit path (relative to new root)
     rollupOptions: {
       input: {
-        main: './src/pages/index.html',
+        index: './src/pages/index.html',
+        background: './src/background.ts',
         // You can add other HTML files here if needed
+      },
+      output: {
+        entryFileNames: (chunkInfo) => {
+          const path = chunkInfo.facadeModuleId.split('/src/').pop();
+          const folder = path.substring(0, path.lastIndexOf('/'));
+          return folder ? `${folder}/[name].js` : '[name].js';
+        },
+        chunkFileNames: 'chunks/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       }
     }
   },
