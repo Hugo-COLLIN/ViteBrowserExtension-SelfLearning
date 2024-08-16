@@ -46,13 +46,13 @@ function generateManifestPlugin(targetBrowser) {
           manifest_version: 3,
           action: srcManifest['{{chrome}}.action'],
           background: {
-            service_worker: srcManifest['{{chrome}}.service_worker']
+            service_worker: srcManifest.background['{{chrome}}.service_worker'].replace('src/', '')
           }
         } : {
           manifest_version: 2,
           browser_action: srcManifest['{{firefox}}.browser_action'],
           background: {
-            scripts: srcManifest['{{firefox}}.scripts']
+            scripts: srcManifest.background['{{firefox}}.scripts'].map(script => script.replace('src/', ''))
           }
         }),
         host_permissions: [
