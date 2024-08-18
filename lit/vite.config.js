@@ -76,17 +76,17 @@ function generateManifestPlugin(targetBrowser) {
         version: pkg.version,
         icons: srcManifest.icons,
         background: {},
-        ...(targetBrowser === 'chrome' ? {
-          manifest_version: 3,
-          action: srcManifest['{{chrome}}.action'],
-          background: {
-            service_worker: srcManifest.background['{{chrome}}.service_worker'].replace('src/', '')
-          }
-        } : {
-          manifest_version: 2,
+        ...(targetBrowser === 'firefox' ? {
+          manifest_version: srcManifest['{{firefox}}.manifest_version'],
           browser_action: srcManifest['{{firefox}}.browser_action'],
           background: {
-            scripts: srcManifest.background['{{firefox}}.scripts'].map(script => script.replace('src/', ''))
+            scripts: srcManifest.background['{{firefox}}.scripts']
+          }
+        } : {
+          manifest_version: srcManifest['{{chrome}}.manifest_version'],
+          action: srcManifest['{{chrome}}.action'],
+          background: {
+            service_worker: srcManifest.background['{{chrome}}.service_worker']
           }
         }),
         host_permissions: [
