@@ -62,7 +62,7 @@ function rollupOutputBasedHtmlFilesLocationPlugin() {
 function generateManifestPlugin(targetBrowser) {
   return {
     name: 'generate-manifest',
-    async buildStart(){
+    async generateBundle(){
       const srcManifestPath = path.join(__dirname, 'src', 'manifest.json');
       const distManifestPath = path.join(__dirname, 'dist', 'manifest.json');
       const pkgPath = path.join(__dirname, 'package.json');
