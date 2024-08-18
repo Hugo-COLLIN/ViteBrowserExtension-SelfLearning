@@ -5,7 +5,11 @@
   "type": "module",
   "scripts": {
     "dev": "tsc && vite build --mode development --watch",
+    "dev:chrome": "tsc && cross-env TARGET=chrome vite build --mode development --watch",
+    "dev:firefox": "tsc && cross-env TARGET=firefox vite build --mode development --watch",
     "build": "tsc && vite build",
+    "build:chrome": "tsc && cross-env TARGET=chrome vite build --watch",
+    "build:firefox": "tsc && cross-env TARGET=firefox vite build",
     "preview": "vite preview"
   },
   "dependencies": {
@@ -18,6 +22,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.270",
+    "cross-env": "^7.0.3",
     "typescript": "^5.5.3",
     "vite": "^5.4.0"
   }

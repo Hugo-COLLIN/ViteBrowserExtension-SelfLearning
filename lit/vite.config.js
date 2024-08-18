@@ -1,49 +1,43 @@
-import { defineConfig } from 'vite';
+import { defineConfig, loadEnv } from 'vite';
 import path from "path";
 import fs from "fs";
 
-export default defineConfig({
-  root: '', // Define the new root folder
-  build: {
-    outDir: './dist', // Exit path (relative to new root)
-    emptyOutDir: true, // Empty the output directory before building
-    //define input path (relative to new root)
-    rollupOptions: {
-      input: {
-        index: './src/pages/index.html',
-        background: './src/background.ts',
-        // You can add other files here if needed
-      },
-      output: {
-        entryFileNames: (chunkInfo) => {
-          const path = chunkInfo.facadeModuleId.split('/src/').pop();
-          const folder = path.substring(0, path.lastIndexOf('/'));
-          return folder ? `${folder}/[name].js` : '[name].js';
+export default defineConfig(({ mode }) => {
+  const targetBrowser = process.env.TARGET || 'chrome';
+
+  return {
+    root: '', // Define the new root folder
+    build: {
+      outDir: './dist', // Exit path (relative to new root)
+      emptyOutDir: true, // Empty the output directory before building
+      //define input path (relative to new root)
+      rollupOptions: {
+        input: {
+          index: './src/pages/index.html',
+          background: './src/background.ts',
+          // You can add other files here if needed
         },
-
-
-        // entryFileNames: (chunkInfo) => {
-        //   const path = chunkInfo.facadeModuleId.split('/src/').pop();
-        //   const folder = path.substring(0, path.lastIndexOf('/'));
-        //
-        //   return folder ? `${folder}/[name].js` : '[name].js';
-        // },
-        // chunkFileNames: 'chunks/[name]-[hash].js',
-        // assetFileNames: 'assets/[name]-[hash].[ext]',
-      },
-    }
-  },
-  plugins: [
-    generateManifestPlugin('chrome'),
-    rollupOutputBasedHtmlFilesLocationPlugin(),
-    {
-      name: 'watch-external',
-      async buildStart(){
-        // Copy new files added to public/ into dist/
-        this.addWatchFile('public');
+        output: {
+          entryFileNames: (chunkInfo) => {
+            const path = chunkInfo.facadeModuleId.split('/src/').pop();
+            const folder = path.substring(0, path.lastIndexOf('/'));
+            return folder ? `${folder}/[name].js` : '[name].js';
+          },
+        },
       }
-    }
-  ]
+    },
+    plugins: [
+      generateManifestPlugin(targetBrowser),
+      rollupOutputBasedHtmlFilesLocationPlugin(),
+      {
+        name: 'watch-external',
+        async buildStart(){
+          // Copy new files added to public/ into dist/
+          this.addWatchFile('public');
+        }
+      }
+    ]
+  };
 });
 
 function rollupOutputBasedHtmlFilesLocationPlugin() {
