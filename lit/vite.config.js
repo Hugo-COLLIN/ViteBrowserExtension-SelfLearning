@@ -28,6 +28,7 @@ export default defineConfig(({mode}) => {
     },
     plugins: [
       generateManifestPlugin(targetBrowser),
+      generateAppInfosPlugin(),
       rollupOutputBasedHtmlFilesLocationPlugin(),
       {
         name: 'watch-external',
@@ -123,6 +124,28 @@ function generateManifestPlugin(targetBrowser) {
       };
 
       writeJsonFile(distManifestPath, manifest);
+    }
+  }
+}
+
+function generateAppInfosPlugin() {
+  return {
+    name: 'generate-app-infos',
+    async generateBundle() {
+      //TODO se baser sur infos.json pour générer manifest.json
+      const distAppInfosPath = path.join(__dirname, 'dist', 'infos.json');
+      const pkgPath = path.join(__dirname, 'package.json');
+      const infosPath = path.join(__dirname, 'src', 'infos.json');
+
+      const pkg = readJsonFile(pkgPath);
+
+      const appInfos = {
+        "APP_VERSION": pkg.version,
+        "APP_DESCRIPTION": pkg.description,
+        ...infosPath && readJsonFile(infosPath)
+      };
+
+      writeJsonFile(distAppInfosPath, appInfos);
     }
   }
 }
