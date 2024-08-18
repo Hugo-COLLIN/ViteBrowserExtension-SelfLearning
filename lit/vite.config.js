@@ -72,28 +72,23 @@ function generateManifestPlugin(targetBrowser) {
 
       const mv = srcManifest[`{{${targetBrowser}}}.manifest_version`];
 
-      const manifest = {
-        manifest_version: mv,
-        name: srcManifest['name'] || pkg.name,
-        version: pkg.version,
-        description: pkg.description,
-        icons: srcManifest.icons,
-        permissions: srcManifest.permissions,
+      // --- Manifest version depending attributes ---
+      let mvAttributes = {};
+      if (mv === 3)
+        mvAttributes = {
+          action: srcManifest[`{{${targetBrowser}}}.action`],
+          host_permissions: srcManifest.host_permissions || ["http://localhost/*"],
+        }
+      else if (mv === 2)
+        mvAttributes = {
+          browser_action: srcManifest[`{{${targetBrowser}}}.action`]
+        }
+      // --- End of manifest version depending attributes ---
 
-        //Action or browser_action depending on manifest version
-        ...(mv === 3
-            ? {
-              action: srcManifest[`{{${targetBrowser}}}.action`],
-              host_permissions: srcManifest.host_permissions || ["http://localhost/*"],
-            }
-            : mv === 2
-              ? {
-                browser_action: srcManifest[`{{${targetBrowser}}}.action`]
-              }
-              : {}
-        ),
-
-        ...(targetBrowser === 'firefox' ? {
+      // --- Browser depending attributes ---
+      let browserAttributes = {};
+      if (targetBrowser === 'firefox')
+        browserAttributes = {
           background: {
             scripts: srcManifest.background['{{firefox}}.scripts']
           },
@@ -102,15 +97,29 @@ function generateManifestPlugin(targetBrowser) {
               gecko: srcManifest['browser_specific_settings']['gecko']
             }
           })
-        } : {
+        }
+      else if (targetBrowser === 'chrome')
+        browserAttributes = {
           background: {
             service_worker: srcManifest.background['{{chrome}}.service_worker']
           }
-        }),
-        content_security_policy: srcManifest.content_security_policy &&
-        mv === 3
+        }
+      // --- End of browser depending attributes ---
+
+      const manifest = {
+        manifest_version: mv,
+        name: srcManifest['name'] || pkg.name,
+        version: pkg.version,
+        description: pkg.description,
+        icons: srcManifest.icons,
+        content_scripts: srcManifest.content_scripts,
+        web_accessible_resources: srcManifest.web_accessible_resources,
+        permissions: srcManifest.permissions,
+        content_security_policy: srcManifest.content_security_policy && mv === 3
           ? {extension_pages: srcManifest.content_security_policy}
           : srcManifest.content_security_policy,
+        ...mvAttributes,
+        ...browserAttributes,
       };
 
       writeJsonFile(distManifestPath, manifest);
