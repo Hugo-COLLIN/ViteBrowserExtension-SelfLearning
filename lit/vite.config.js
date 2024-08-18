@@ -1,8 +1,8 @@
-import { defineConfig, loadEnv } from 'vite';
+import {defineConfig, loadEnv} from 'vite';
 import path from "path";
 import fs from "fs";
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({mode}) => {
   const targetBrowser = process.env.TARGET || 'chrome';
 
   return {
@@ -31,7 +31,7 @@ export default defineConfig(({ mode }) => {
       rollupOutputBasedHtmlFilesLocationPlugin(),
       {
         name: 'watch-external',
-        async buildStart(){
+        async buildStart() {
           // Copy new files added to public/ into dist/
           this.addWatchFile('public');
         }
@@ -62,7 +62,7 @@ function rollupOutputBasedHtmlFilesLocationPlugin() {
 function generateManifestPlugin(targetBrowser) {
   return {
     name: 'generate-manifest',
-    async generateBundle(){
+    async generateBundle() {
       const srcManifestPath = path.join(__dirname, 'src', 'manifest.json');
       const distManifestPath = path.join(__dirname, 'dist', 'manifest.json');
       const pkgPath = path.join(__dirname, 'package.json');
@@ -70,31 +70,47 @@ function generateManifestPlugin(targetBrowser) {
       const srcManifest = readJsonFile(srcManifestPath);
       const pkg = readJsonFile(pkgPath);
 
+      const mv = srcManifest[`{{${targetBrowser}}}.manifest_version`];
+
       const manifest = {
-        name: pkg.name,
-        description: pkg.description,
+        manifest_version: mv,
+        name: srcManifest['name'] || pkg.name,
         version: pkg.version,
+        description: pkg.description,
         icons: srcManifest.icons,
-        background: {},
+        permissions: srcManifest.permissions,
+
+        //Action or browser_action depending on manifest version
+        ...(mv === 3
+            ? {
+              action: srcManifest[`{{${targetBrowser}}}.action`],
+              host_permissions: srcManifest.host_permissions || ["http://localhost/*"],
+            }
+            : mv === 2
+              ? {
+                browser_action: srcManifest[`{{${targetBrowser}}}.action`]
+              }
+              : {}
+        ),
+
         ...(targetBrowser === 'firefox' ? {
-          manifest_version: srcManifest['{{firefox}}.manifest_version'],
-          browser_action: srcManifest['{{firefox}}.browser_action'],
           background: {
             scripts: srcManifest.background['{{firefox}}.scripts']
-          }
+          },
+          ...(srcManifest['browser_specific_settings']['gecko'] && {
+            browser_specific_settings: {
+              gecko: srcManifest['browser_specific_settings']['gecko']
+            }
+          })
         } : {
-          manifest_version: srcManifest['{{chrome}}.manifest_version'],
-          action: srcManifest['{{chrome}}.action'],
           background: {
             service_worker: srcManifest.background['{{chrome}}.service_worker']
           }
         }),
-        host_permissions: [
-          "http://localhost/*"
-        ],
-        content_security_policy: {
-          extension_pages: "script-src 'self' 'wasm-unsafe-eval' http://localhost:*; object-src 'self';"
-        }
+        content_security_policy: srcManifest.content_security_policy &&
+        mv === 3
+          ? {extension_pages: srcManifest.content_security_policy}
+          : srcManifest.content_security_policy,
       };
 
       writeJsonFile(distManifestPath, manifest);
