@@ -10,8 +10,8 @@
     "build": "tsc && vite build",
     "build:chrome": "tsc && cross-env TARGET=chrome vite build",
     "build:firefox": "tsc && cross-env TARGET=firefox vite build",
-    "prod": "tsc && vite build --mode production",
-    "preview": "vite preview"
+    "prod": "tsc && cross-env TARGET=chrome vite build --mode production && node config/zip.js && cross-env TARGET=firefox vite build --mode production && node config/zip.js",
+    "zip": "node manage/zip.js"
   },
   "dependencies": {
     "@shoelace-style/shoelace": "^2.16.0",
@@ -23,6 +23,7 @@
   },
   "devDependencies": {
     "@types/chrome": "^0.0.270",
+    "adm-zip": "^0.5.15",
     "cross-env": "^7.0.3",
     "typescript": "^5.5.3",
     "vite": "^5.4.0"
