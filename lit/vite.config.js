@@ -28,7 +28,7 @@ export default defineConfig(({mode}) => {
     },
     plugins: [
       generateManifestPlugin(targetBrowser),
-      generateAppInfosPlugin(),
+      generateAppInfosPlugin(mode),
       rollupOutputBasedHtmlFilesLocationPlugin(),
       {
         name: 'watch-external',
@@ -128,7 +128,7 @@ function generateManifestPlugin(targetBrowser) {
   }
 }
 
-function generateAppInfosPlugin() {
+function generateAppInfosPlugin(app_mode) {
   return {
     name: 'generate-app-infos',
     async generateBundle() {
@@ -142,6 +142,10 @@ function generateAppInfosPlugin() {
       const appInfos = {
         "APP_VERSION": pkg.version,
         "APP_DESCRIPTION": pkg.description,
+        ...(app_mode === 'production'
+          ? {"APP_MODE": 'prod'}
+          : {"APP_MODE": 'dev'}
+        ),
         ...infosPath && readJsonFile(infosPath)
       };
 

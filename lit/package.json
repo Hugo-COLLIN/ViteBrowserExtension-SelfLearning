@@ -10,6 +10,7 @@
     "build": "tsc && vite build",
     "build:chrome": "tsc && cross-env TARGET=chrome vite build",
     "build:firefox": "tsc && cross-env TARGET=firefox vite build",
+    "prod": "tsc && vite build --mode production",
     "preview": "vite preview"
   },
   "dependencies": {
