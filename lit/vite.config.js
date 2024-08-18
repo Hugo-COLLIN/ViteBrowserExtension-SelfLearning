@@ -3,6 +3,7 @@ import {moveHtmlFilesBasedOnRollupOutputPlugin} from "./config/vite/plugins/move
 import {generateManifestPlugin} from "./config/vite/plugins/generateManifest.js";
 import {generateAppInfosPlugin} from "./config/vite/plugins/generateAppInfos.js";
 import {generateLicensesPlugin} from "./config/vite/plugins/generateLicensesList.js";
+import {watchDir} from "./config/vite/plugins/watchDir.js";
 
 export default defineConfig(({mode}) => {
   const targetBrowser = process.env.TARGET || 'chrome';
@@ -33,13 +34,7 @@ export default defineConfig(({mode}) => {
       generateAppInfosPlugin(mode),
       moveHtmlFilesBasedOnRollupOutputPlugin(),
       generateLicensesPlugin(),
-      {
-        name: 'watch-external',
-        async buildStart() {
-          // Copy new files added to public/ into dist/
-          this.addWatchFile('public');
-        }
-      }
+      watchDir('public')
     ]
   };
 });
