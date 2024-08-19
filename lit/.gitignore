@@ -25,6 +25,6 @@ dist-ssr
 *.sw?
 
 
-*/config.json
-*/publish.json
-*/key.json
+*config.json
+*publish.json
+*key.json
