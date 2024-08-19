@@ -1,4 +1,4 @@
-# <img alt="SaveMyChatbot logo" src="./src/assets/icons/icon-128.png" style="width:40px"> Save my Chatbot - AI Conversation Exporter
+# <img alt="SaveMyChatbot logo" src="./src/files/icons/icon-128.png" style="width:40px"> Save my Chatbot - AI Conversation Exporter
 ### 🚀 Download your Phind, Perplexity and MaxAI-Google search threads into markdown files!
 
 ## 🗺️ Welcome, new exporters!

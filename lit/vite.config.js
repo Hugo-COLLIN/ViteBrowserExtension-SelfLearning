@@ -18,6 +18,7 @@ export default defineConfig(({mode}) => {
         input: {
           index: './src/pages/index.html',
           background: './src/background.ts',
+          tab: './src/tab.ts',
           // You can add other files here if needed
         },
         output: {

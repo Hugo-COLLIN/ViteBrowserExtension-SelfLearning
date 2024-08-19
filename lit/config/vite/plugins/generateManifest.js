@@ -53,7 +53,7 @@ export function generateManifestPlugin(targetBrowser) {
         manifest_version: mv,
         name: srcManifest['name'] || pkg.name,
         version: pkg.version,
-        description: pkg.description,
+        description: srcManifest.description,
         icons: srcManifest.icons,
         content_scripts: srcManifest.content_scripts,
         web_accessible_resources: srcManifest.web_accessible_resources,
