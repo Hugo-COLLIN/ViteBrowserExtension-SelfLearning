@@ -35,7 +35,7 @@
       "*://*.perplexity.ai/*",
       "*://*.google.com/search*"
     ],
-    "js": ["tab.js"]
+    "js": ["scripts/content/tab.js"]
   }],
   "web_accessible_resources": [{
     "resources": ["files/*"],

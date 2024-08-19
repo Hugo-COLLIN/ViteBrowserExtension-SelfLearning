@@ -4,6 +4,7 @@ import {generateManifestPlugin} from "./config/vite/plugins/generateManifest.js"
 import {generateAppInfosPlugin} from "./config/vite/plugins/generateAppInfos.js";
 import {generateLicensesPlugin} from "./config/vite/plugins/generateLicensesList.js";
 import {watchDir} from "./config/vite/plugins/watchDir.js";
+import {disableChunks} from "./config/vite/plugins/disableChunks.js";
 
 export default defineConfig(({mode}) => {
   const targetBrowser = process.env.TARGET || 'chrome';
@@ -13,24 +14,35 @@ export default defineConfig(({mode}) => {
     build: {
       outDir: './dist', // Exit path (relative to new root)
       emptyOutDir: true, // Empty the output directory before building
+      minify: false,
       //define input path (relative to new root)
       rollupOptions: {
         input: {
           index: './src/pages/index.html',
           background: './src/scripts/background/background.js',
-          tab: './src/tab.ts',
+          // tab: './src/tab.ts',
+          tab: './src/scripts/content/tab.js',
           // You can add other files here if needed
         },
         output: {
+          // format: 'es',
+          // format: 'iife',
+          // format: 'umd',
+          // format: 'esm',
           entryFileNames: (chunkInfo) => {
             const path = chunkInfo.facadeModuleId.split('/src/').pop();
             const folder = path.substring(0, path.lastIndexOf('/'));
             return folder ? `${folder}/[name].js` : '[name].js';
           },
+          // preserveModules: false,
+          // manualChunks: {},
+          // inlineDynamicImports: false,
+          // preserveEntrySignatures: 'strict',
         },
       }
     },
     plugins: [
+      disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
       generateManifestPlugin(targetBrowser),
       generateAppInfosPlugin(mode),
       moveHtmlFilesBasedOnRollupOutputPlugin(),
