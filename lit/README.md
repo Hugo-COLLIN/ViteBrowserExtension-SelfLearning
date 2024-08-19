@@ -21,39 +21,46 @@ Simple!
 - To **read and process** in a knowledge base / note-taking app (like Obsidian),
 - To **share threads with others**.
 
+### 🎯 Main features:
+- [x] Export chats from Phind, Perplexity and MaxAI-Google
+- [x] Clean markdown formatting and structuring
+- [x] Keep numbered sources in the exported file
+- [x] Configure your exports (filename, more options coming soon...)
+- [x] Informative file header and filename (date, url...)
+- [x] Indicates the chatbot response mode used (Phind-Search and Perplexity)
+- [x] Informative modals (updates...)
+
 ✅ Enjoy!
 
 ✏️ Please note that this project is not affiliated with any chatbot service.
 
 <br>
 
-## 🚀 What's going on?
+## 🚀 What's going on here?
 
 ### 💡 In the pipeline...
-Check the [Issues](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/issues) and [Pull requests](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/pulls) to see what's going on! 
-
-### 🎯 Main features:
-- [x] Export chats from Phind, Perplexity and MaxAI-Google
-- [x] Clean markdown formatting and structuring
-- [x] Keep numbered sources in the exported file
-- [x] Informative file header and filename (date, url...)
-- [x] Configure your exports (filename, more coming soon...)
-- [x] Indicates the chatbot response mode used (Phind-Search and Perplexity)
-- [x] Informative modals (updates...)
+Check the [Issues](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/issues) and [Pull requests](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/pulls) to see what's going on!
 
 ### 🤯 The most important things I keep improving / fixing:
 - Because chatbots are constantly changing their interfaces: Fix broken export, wrong formatting and content extracted.
 - Improve code maintainability
 - Adding more customization features
 
-### 🪶 Contribution
-Feel free to [open an issue](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/issues/new) if you have any suggestion or bug report.
+### 🪶 How can I help?
+Feel free to open [a discussion](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/discussions) or [an issue](https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter/issues) if you have any idea or problem.
 
 You can also contribute by forking it and making pull requests. This project is licensed under the [RMD-C v1.0 License](LICENSE.txt), please check for more details.
+
 
 <br>
 
 
+## 💌 If you appreciate my work, help me by donating:
+  <div align="center">
+      <a href="https://save.hugocollin.com/support" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="50px"/></a> 
+  </div>
+
+<!--
 ## ⬇️ How to install? (detailed)
 ### Quick install (automatic updates)
 Simply go to the store and click on the installation button:
@@ -77,7 +84,8 @@ You can also install it manually following these steps:
 
 <br>
 
-## 💌 If you appreciate my work, help me by donating:
-  <div align="center">
-      <a href="https://save.hugocollin.com/support" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="50px"/></a> 
-  </div>
+
+What about the community?
+
+If you're a tester, please check this page: [Testers](TESTERS.md)
+-->
