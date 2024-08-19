@@ -57,7 +57,7 @@ This project is licensed under the [RMD-C v1.0 License](LICENSE.txt). Please rev
 
 
 ## ❤️ Keep it alive!
-Appreciate my efforts? Help me maintain and improve Save my Chatbot by making a donation:
+Appreciate my efforts? Help me maintain and improve Save my Chatbot by donating:
 <div align="center">
     <a href="https://save.hugocollin.com/support" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="50px"/></a> 
 </div>
