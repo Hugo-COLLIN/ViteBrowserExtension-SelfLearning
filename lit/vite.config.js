@@ -17,7 +17,7 @@ export default defineConfig(({mode}) => {
       rollupOptions: {
         input: {
           index: './src/pages/index.html',
-          background: './src/background.ts',
+          background: './src/scripts/background/background.js',
           tab: './src/tab.ts',
           // You can add other files here if needed
         },

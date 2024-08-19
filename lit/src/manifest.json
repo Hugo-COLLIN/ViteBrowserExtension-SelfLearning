@@ -26,8 +26,8 @@
     "default_icon": "files/icons/icon_disabled-500.png"
   },
   "background": {
-    "{{chrome}}.service_worker": "background.js",
-    "{{firefox}}.scripts": ["background.js"]
+    "{{chrome}}.service_worker": "scripts/background/background.js",
+    "{{firefox}}.scripts": ["scripts/background/background.js"]
   },
   "content_scripts": [{
     "matches": [
