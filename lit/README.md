@@ -28,8 +28,7 @@ Simple!
 - [x] Configure your exports (filename, more options coming soon...)
 - [x] Informative file header and filename (date, url...)
 - [x] Indicates the chatbot response mode used (Phind-Search and Perplexity)
-- [x] Informative modals
-- [x] Regular updates
+- [x] Informative modals (updates...)
 
 ✅ Enjoy!
 
@@ -40,8 +39,9 @@ Simple!
 ## 🚀 Behind the Scenes
 
 ### 🤯 Challenges in Development
-Developing Save my Chatbot involves continuous adaptation to the ever-changing interfaces of supported chatbots. Here are some of the challenges I tackle:
+Chatbots are constatly changing their interfaces. That makes developing Save my Chatbot a wild adventure. Here are some of the challenges I tackle:
 - **Interface Changes**: Regular updates to fix broken exports, incorrect formatting, and content extraction issues.
+- **New Chatbots**: Each chatbot has its unique interface, so I dive into the page source code to understand its structure and what I need to extract to create a clean export file.
 - **Code Maintainability**: Enhancing the codebase to ensure it remains clean, understandable, and adaptable.
 - **Feature Expansion**: Working on adding more features to enhance user experience.
 
@@ -57,22 +57,12 @@ This project is licensed under the [RMD-C v1.0 License](LICENSE.txt). Please rev
 
 
 ## ❤️ Keep it alive!
-Appreciate my efforts? By making a donation, you can help me improve and maintain this project:
+Appreciate my efforts? Help me maintain and improve Save my Chatbot by making a donation:
 <div align="center">
     <a href="https://save.hugocollin.com/support" target="_blank"><img src="https://img.shields.io/badge/PayPal-00457C?style=for-the-badge&logo=paypal&logoColor=white" height="50px"/></a> 
 </div>
 
 <!--
-
-
-
-<br>
-
-
-
-
-
-
 ## ⬇️ How to install? (detailed)
 ### Quick install (automatic updates)
 Simply go to the store and click on the installation button:
