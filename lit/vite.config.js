@@ -19,9 +19,10 @@ export default defineConfig(({mode}) => {
       //define input path (relative to new root)
       rollupOptions: {
         input: {
-          index: './src/pages/index.html',
           background: './src/scripts/background/background.js',
           tab: './src/scripts/content/tab.js',
+          options: './src/pages/options.html',
+          // options: './src/scripts/pages/options.html',
           // You can add other files here if needed
         },
         output: {
