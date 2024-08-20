@@ -15,7 +15,10 @@ export function moveHtmlFilesBasedOnRollupOutputPlugin() {
           fs.renameSync(srcPath, destPath);
         }
       });
-      fs.rmdirSync(path.resolve(options.dir, 'src'), {recursive: true});
+      if (fs.existsSync(path.resolve(options.dir, 'src'))) {
+        console.log('Removing src folder')
+        fs.rmdirSync(path.resolve(options.dir, 'src'), {recursive: true});
+      }
     }
   };
 }
