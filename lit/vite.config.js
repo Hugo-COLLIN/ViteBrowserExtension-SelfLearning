@@ -5,6 +5,7 @@ import {generateAppInfosPlugin} from "./config/vite/plugins/generateAppInfos.js"
 import {generateLicensesPlugin} from "./config/vite/plugins/generateLicensesList.js";
 import {watchDir} from "./config/vite/plugins/watchDir.js";
 import {disableChunks} from "./config/vite/plugins/disableChunks.js";
+import inlineChunksPlugin from "./config/vite/plugins/inlineChunks.js";
 
 export default defineConfig(({mode}) => {
   const targetBrowser = process.env.TARGET || 'chrome';
@@ -34,15 +35,37 @@ export default defineConfig(({mode}) => {
             const folder = path.substring(0, path.lastIndexOf('/'));
             return folder ? `${folder}/[name].js` : '[name].js';
           },
+          // manualChunks: () => 'all-in-one'
           // preserveModules: false,
           // manualChunks: {},
           // inlineDynamicImports: false,
           // preserveEntrySignatures: 'strict',
         },
+        // plugins: [
+        //   disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
+        // ]
       }
     },
     plugins: [
-      disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
+      // {
+      //   name: "hackly resolve modules for disabling code-splitting",
+      //   enforce: "pre",
+      //   resolveId(source, importer, options) {
+      //     return this.resolve(source, importer, { skipSelf: true }).then(resolved => {
+      //       if (resolved && targets.some(file => resolved.id.includes(file))) {
+      //         return { id: `${resolved.id}?unique=${Math.random()}`, moduleSideEffects: 'no-treeshake' };
+      //       }
+      //       return resolved;
+      //     });
+      //   },
+      //   load(id) {
+      //     if (id.endsWith("src/share/presetColors.ts?is_copied")) {
+      //       return readFile("src/share/presetColors.ts", "utf-8");
+      //     }
+      //   },
+      // },
+      // disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
+      inlineChunksPlugin(),
       generateManifestPlugin(targetBrowser),
       generateAppInfosPlugin(mode),
       moveHtmlFilesBasedOnRollupOutputPlugin(),

@@ -26,6 +26,7 @@
     "@types/chrome": "^0.0.270",
     "adm-zip": "^0.5.15",
     "cross-env": "^7.0.3",
+    "magic-string": "^0.30.11",
     "typescript": "^5.5.3",
     "vite": "^5.4.0",
     "vitest": "^2.0.5"
