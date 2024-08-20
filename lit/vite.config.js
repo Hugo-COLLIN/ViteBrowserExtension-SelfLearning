@@ -35,15 +35,14 @@ export default defineConfig(({mode}) => {
             const folder = path.substring(0, path.lastIndexOf('/'));
             return folder ? `${folder}/[name].js` : '[name].js';
           },
-          // manualChunks: () => 'all-in-one'
-          // preserveModules: false,
+          // manualChunks: () => 'all-in-one',
+          // preserveModules: true,
           // manualChunks: {},
           // inlineDynamicImports: false,
           // preserveEntrySignatures: 'strict',
         },
-        // plugins: [
-        //   disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
-        // ]
+        // preserveEntrySignatures: 'strict',
+        // inlineDynamicImports: true,
       }
     },
     plugins: [
@@ -64,8 +63,8 @@ export default defineConfig(({mode}) => {
       //     }
       //   },
       // },
-      // disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
-      inlineChunksPlugin(),
+      disableChunks(['./src/scripts/background/background.js', './src/scripts/content/tab.js']),
+      // inlineChunksPlugin(),
       generateManifestPlugin(targetBrowser),
       generateAppInfosPlugin(mode),
       moveHtmlFilesBasedOnRollupOutputPlugin(),
