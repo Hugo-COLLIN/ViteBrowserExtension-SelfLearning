@@ -38,14 +38,14 @@ export const disableChunks = (targets = []) => {
             'g'
           );
 
-          console.log(inputChunk.code.split('\n')[0])
-          console.log(importRegex)
+          // console.log(inputChunk.code.split('\n')[0])
+          // console.log(importRegex)
 
           const test = importRegex.test(inputChunk.code)
-          console.log('importRegex:', test)
+          // console.log('importRegex:', test)
           if (test) {
             const exportRegex = /\n*export \{[^}]*\};\n*/g
-            console.log("OK§§§§§", exportRegex.test(code))
+            // console.log("OK§§§§§", exportRegex.test(code))
             const injectedCode = code.replace(exportRegex, '');
             inputChunk.code = inputChunk.code.replace(importRegex, injectedCode);
             // console.log(inputChunk.code.split('\n')[0])
