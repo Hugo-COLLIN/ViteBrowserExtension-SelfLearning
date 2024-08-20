@@ -33,11 +33,8 @@ export const disableChunks = (targets = []) => {
       // Injecter le code des non-entry chunks dans les chunks d'entrée
       entryChunks.forEach(inputChunk => {
         Object.entries(nonEntryCodeMap).forEach(([fileName, code]) => {
-          // console.log('---' +
-          //   'CODE' +
-          //   '---', code)
           const importRegex = new RegExp(
-            `import \{.*\} from ['"](\.\.\/)*${fileName}['"]`,
+            `import \{.*\} from ['"](\.\.\/)*${fileName}['"];+`,
             'g'
           );
 
@@ -47,9 +44,11 @@ export const disableChunks = (targets = []) => {
           const test = importRegex.test(inputChunk.code)
           console.log('importRegex:', test)
           if (test) {
-            console.log("OK§§§§§")
-            inputChunk.code = inputChunk.code.replace(importRegex, code);
-            console.log(inputChunk.code.split('\n')[0])
+            const exportRegex = /\n*export \{[^}]*\};\n*/g
+            console.log("OK§§§§§", exportRegex.test(code))
+            const injectedCode = code.replace(exportRegex, '');
+            inputChunk.code = inputChunk.code.replace(importRegex, injectedCode);
+            // console.log(inputChunk.code.split('\n')[0])
             // Write the new code back to the bundle
             // bundle[inputChunk.fileName] = inputChunk;
             // fs.writeFileSync(path.resolve(options.dir, inputChunk.fileName), inputChunk.code);
