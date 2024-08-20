@@ -34,7 +34,7 @@ export const disableChunks = (targets = []) => {
       entryChunks.forEach(inputChunk => {
         Object.entries(nonEntryCodeMap).forEach(([fileName, code]) => {
           const importRegex = new RegExp(
-            `import \{.*\} from ['"](\.\.\/)*${fileName}['"];+`,
+            `import \{.*\} from ['"][(\.\.\/)(\.\/)]*${fileName}['"];+`,
             'g'
           );
 

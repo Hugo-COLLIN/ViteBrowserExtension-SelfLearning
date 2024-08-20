@@ -30,9 +30,15 @@ export default defineConfig(({mode}) => {
           // format: 'umd',
           // format: 'esm',
           entryFileNames: (chunkInfo) => {
-            const path = chunkInfo.facadeModuleId.split('/src/').pop();
-            const folder = path.substring(0, path.lastIndexOf('/'));
-            return folder ? `${folder}/[name].js` : '[name].js';
+            const fileName = chunkInfo.name;
+            if (fileName === 'background' || fileName === 'tab') {
+              // Place background.js and tab.js at the root of the output directory
+              return '[name].js';
+            } else {
+              const path = chunkInfo.facadeModuleId.split('/src/').pop();
+              const folder = path.substring(0, path.lastIndexOf('/'));
+              return folder ? `${folder}/[name].js` : '[name].js';
+            }
           },
         },
       }
