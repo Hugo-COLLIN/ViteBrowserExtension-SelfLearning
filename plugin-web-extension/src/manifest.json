@@ -16,7 +16,7 @@
     "storage",
     "contextMenus"
   ],
-  "host_permissions": [
+  "{{chrome}}.host_permissions": [
     "*://*.phind.com/*",
     "*://*.perplexity.ai/*",
     "*://google.com/search*"
@@ -39,20 +39,35 @@
   },
   "background": {
     "{{chrome}}.service_worker": "src/background.ts",
-    "{{firefox}}.scripts": ["src/background.ts"]
+    "{{firefox}}.scripts": [
+      "src/background.ts"
+    ]
   },
-  "content_scripts": [{
-    "matches": [
-      "*://*.phind.com/*",
-      "*://*.perplexity.ai/*",
-      "*://*.google.com/search*"
-    ],
-    "js": ["src/tab.ts"]
-  }],
-  "web_accessible_resources": [{
-    "resources": ["files/*"],
-    "matches": ["<all_urls>"]
-  }],
+  "content_scripts": [
+    {
+      "matches": [
+        "*://*.phind.com/*",
+        "*://*.perplexity.ai/*",
+        "*://*.google.com/search*"
+      ],
+      "js": [
+        "src/tab.ts"
+      ]
+    }
+  ],
+  "{{chrome}}.web_accessible_resources": [
+    {
+      "resources": [
+        "files/*"
+      ],
+      "matches": [
+        "<all_urls>"
+      ]
+    }
+  ],
+  "{{firefox}}.web_accessible_resources": [
+    "files/*"
+  ],
   "browser_specific_settings": {
     "gecko": {
       "id": "example@extension.com",

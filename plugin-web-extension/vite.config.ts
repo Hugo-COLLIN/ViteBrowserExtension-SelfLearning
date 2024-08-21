@@ -18,6 +18,7 @@ export default defineConfig({
       manifest: generateManifest,
       watchFilePaths: ["package.json", "manifest.json"],
       disableAutoLaunch: true,
+      browser: process.env.TARGET || "chrome",
     }),
   ],
 });
