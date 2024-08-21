@@ -38,7 +38,7 @@
     }
   },
   "background": {
-    "{{chrome}}.service_worker": "src/background.ts",
+    "{{chrome}}.service_worker": "src/background.js",
     "{{firefox}}.scripts": [
       "src/background.ts"
     ]
@@ -70,7 +70,7 @@
   ],
   "{{firefox}}.browser_specific_settings": {
     "gecko": {
-      "id": "example@extension.com",
+      "id": "savemyphind@hugocollin.com",
       "strict_min_version": "109.0"
     }
   }
