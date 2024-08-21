@@ -1,0 +1,20 @@
+{
+  "APP_NAME": "Save my Chatbot",
+  "APP_SNAME": "SaveMyChatbot",
+  "APP_LNAME": "Save my Chatbot - AI Conversation Exporter",
+  "APP_ID": "savemyphind@hugocollin.com",
+  "APP_MODE": "",
+  "URLS": {
+    "REPOSITORY": "https://github.com/Hugo-COLLIN/SaveMyPhind-conversation-exporter",
+    "WEBSITE": "https://save.hugocollin.com",
+    "SUPPORT": "https://save.hugocollin.com/support",
+    "FEEDBACK": "https://save.hugocollin.com/feedback?utm_medium=extension&utm_campaign=feedback",
+    "DISCUSSIONS": "https://save.hugocollin.com/discussion",
+    "STORES": {
+      "CHROME": "https://chromewebstore.google.com/u/1/detail/agklnagmfeooogcppjccdnoallkhgkod",
+      "FIREFOX": "https://addons.mozilla.org/firefox/addon/save-my-phind"
+    }
+  },
+  "CONTACT_EMAIL": "hcollin.dev@gmail.com",
+  "COPY_MODE": "tab"
+}
