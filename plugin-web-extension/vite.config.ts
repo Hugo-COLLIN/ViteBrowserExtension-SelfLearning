@@ -1,5 +1,6 @@
 import { defineConfig } from "vite";
 import webExtension, { readJsonFile } from "vite-plugin-web-extension";
+import {generateLicensesPlugin} from "./config/vite/plugins/generateLicensesList";
 
 function generateManifest() {
   const manifest = readJsonFile("src/manifest.json");
@@ -20,5 +21,6 @@ export default defineConfig({
       disableAutoLaunch: true,
       browser: process.env.TARGET || "chrome",
     }),
+    generateLicensesPlugin(),
   ],
 });
