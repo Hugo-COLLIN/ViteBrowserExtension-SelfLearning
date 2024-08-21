@@ -68,7 +68,7 @@
   "{{firefox}}.web_accessible_resources": [
     "files/*"
   ],
-  "browser_specific_settings": {
+  "{{firefox}}.browser_specific_settings": {
     "gecko": {
       "id": "example@extension.com",
       "strict_min_version": "109.0"
