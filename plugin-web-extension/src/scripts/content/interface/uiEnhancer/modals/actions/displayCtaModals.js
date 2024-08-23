@@ -8,8 +8,8 @@ import {
   updateClickIconCount
 } from "../../../../../background/interface/icon/clickCount";
 
-const MODAL_SURVEY = 'files/modalMessages/modalSurvey.md';
-const MODAL_DONATION = 'files/modalMessages/modalDonation.md';
+const MODAL_SURVEY = '../files/modalMessages/modalSurvey.md';
+const MODAL_DONATION = '../files/modalMessages/modalDonation.md';
 
 // Array of modals
 const modals = [MODAL_SURVEY, MODAL_DONATION, MODAL_SURVEY, MODAL_DONATION];

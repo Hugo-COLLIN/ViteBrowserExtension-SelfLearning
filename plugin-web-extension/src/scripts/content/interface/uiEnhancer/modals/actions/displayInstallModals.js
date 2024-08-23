@@ -14,7 +14,7 @@ export async function displayInstallModals(domain) {
 
   // Create "welcome" modal if needed
   if (displayModalWelcome) {
-    await new ModalMessage('files/modalMessages/modalTutorial.md').appendModal();
+    await new ModalMessage('../files/modalMessages/modalTutorial.md').appendModal();
     chrome.storage.sync.set({displayModalWelcome: false});
   }
 }

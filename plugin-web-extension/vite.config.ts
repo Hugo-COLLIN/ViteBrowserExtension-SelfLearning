@@ -14,6 +14,9 @@ function generateManifest() {
 }
 
 export default defineConfig({
+  build: {
+    minify: false,
+  },
   plugins: [
     webExtension({
       manifest: generateManifest,
