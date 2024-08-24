@@ -13,15 +13,20 @@ export function generateAppInfosPlugin(app_mode) {
 
       const pkg = readJsonFile(pkgPath);
 
+      const appMode = app_mode === 'production'
+        ? {"APP_MODE": 'prod'}
+        : {"APP_MODE": 'dev'};
+
+      // console.log(appMode)
+
       const appInfos = {
         "APP_VERSION": pkg.version,
         "APP_DESCRIPTION": pkg.description,
-        ...(app_mode === 'production'
-            ? {"APP_MODE": 'prod'}
-            : {"APP_MODE": 'dev'}
-        ),
-        ...infosPath && readJsonFile(infosPath)
+        ...infosPath && readJsonFile(infosPath),
+        ...appMode
       };
+
+      // console.log(appInfos);
 
       writeJsonFile(distAppInfosPath, appInfos);
     }
