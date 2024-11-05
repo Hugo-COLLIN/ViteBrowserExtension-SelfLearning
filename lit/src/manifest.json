@@ -1,0 +1,50 @@
+{
+  "{{chrome}}.manifest_version": 3,
+  "{{firefox}}.manifest_version": 2,
+  "name": "Save my Chatbot - AI Conversation Exporter",
+  "description": "🚀 Export your Phind, Perplexity and MaxAI-Google search threads into markdown files!",
+  "icons": {
+    "16": "files/icons/icon-16.png",
+    "48": "files/icons/icon-48.png",
+    "128": "files/icons/icon-128.png"
+  },
+  "permissions": [
+    "scripting",
+    "activeTab",
+    "storage",
+    "contextMenus"
+  ],
+  "host_permissions": [
+    "*://*.phind.com/*",
+    "*://*.perplexity.ai/*",
+    "*://google.com/search*"
+  ],
+  "{{chrome}}.action": {
+    "default_icon": "files/icons/icon_disabled-500.png"
+  },
+  "{{firefox}}.action": {
+    "default_icon": "files/icons/icon_disabled-500.png"
+  },
+  "background": {
+    "{{chrome}}.service_worker": "background.js",
+    "{{firefox}}.scripts": ["background.js"]
+  },
+  "content_scripts": [{
+    "matches": [
+      "*://*.phind.com/*",
+      "*://*.perplexity.ai/*",
+      "*://*.google.com/search*"
+    ],
+    "js": ["tab.js"]
+  }],
+  "web_accessible_resources": [{
+    "resources": ["files/*"],
+    "matches": ["<all_urls>"]
+  }],
+  "browser_specific_settings": {
+    "gecko": {
+      "id": "example@extension.com",
+      "strict_min_version": "109.0"
+    }
+  }
+}

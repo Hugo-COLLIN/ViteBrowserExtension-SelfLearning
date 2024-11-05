@@ -1,0 +1,23 @@
+{
+  "name": "save-my-chatbot",
+  "private": true,
+  "version": "1.0.0",
+  "type": "module",
+  "scripts": {
+    "compile": "tsc --noEmit",
+    "dev": "vite",
+    "dev:chrome": "cross-env TARGET=chrome vite",
+    "dev:firefox": "cross-env TARGET=firefox vite",
+    "build": "vite build",
+    "build:chrome": "cross-env TARGET=chrome vite build",
+    "build:firefox": "cross-env TARGET=firefox vite build",
+    "prod": "cross-env TARGET=chrome vite build && node config/zip.js && cross-env TARGET=firefox vite build && node config/zip.js",
+    "zip": "node config/zip.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.270",
+    "cross-env": "^7.0.3",
+    "vite": "^5.0.0"
+  }
+}
